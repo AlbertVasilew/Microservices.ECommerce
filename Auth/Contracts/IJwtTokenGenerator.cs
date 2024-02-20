@@ -4,6 +4,6 @@ namespace Auth.Contracts
 {
     public interface IJwtTokenGenerator
     {
-        string Generate(IdentityUser user);
+        string Generate(IdentityUser user, IList<string> roles);
     }
 }

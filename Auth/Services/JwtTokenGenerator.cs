@@ -16,7 +16,7 @@ namespace Auth.Services
             jwtOptions = configuration.GetSection("JwtOptions");
         }
 
-        public string Generate(IdentityUser user)
+        public string Generate(IdentityUser user, IList<string> roles)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -26,6 +26,8 @@ namespace Auth.Services
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id)
             };
+
+            claims.AddRange(roles.Select(x => new Claim(ClaimTypes.Role, x)));
 
             var token = tokenHandler.CreateToken(new SecurityTokenDescriptor
             {

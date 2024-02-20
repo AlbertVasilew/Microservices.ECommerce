@@ -25,8 +25,13 @@ namespace Auth.Handlers.Login
             var user = await dbContext.Users
                 .FirstOrDefaultAsync(x => x.UserName.ToLower() == request.Username.ToLower(), cancellationToken);
 
-            return await userManager.CheckPasswordAsync(user, request.Password)
-                ? jwtTokenGenerator.Generate(user) : string.Empty;
+            if (await userManager.CheckPasswordAsync(user, request.Password))
+            {
+                var roles = await userManager.GetRolesAsync(user);
+                return jwtTokenGenerator.Generate(user, roles);
+            }
+
+            return string.Empty;
         }
     }
 }
