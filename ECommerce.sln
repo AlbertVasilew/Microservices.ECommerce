@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "Auth\Auth.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products", "Products\Products.csproj", "{1155CF55-D093-4427-BEEE-98028E6CAE5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart", "Cart\Cart.csproj", "{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1155CF55-D093-4427-BEEE-98028E6CAE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1155CF55-D093-4427-BEEE-98028E6CAE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1155CF55-D093-4427-BEEE-98028E6CAE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
