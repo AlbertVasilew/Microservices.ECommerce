@@ -17,8 +17,6 @@ namespace Cart.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Total = table.Column<double>(type: "double precision", nullable: false),
-                    Discount = table.Column<double>(type: "double precision", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: false),
                     CouponCode = table.Column<string>(type: "text", nullable: false)
                 },
@@ -33,9 +31,9 @@ namespace Cart.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    HeaderId = table.Column<int>(type: "integer", nullable: false),
                     ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Count = table.Column<int>(type: "integer", nullable: false)
+                    Count = table.Column<int>(type: "integer", nullable: false),
+                    HeaderId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,8 +42,7 @@ namespace Cart.Data.Migrations
                         name: "FK_Items_Headers_HeaderId",
                         column: x => x.HeaderId,
                         principalTable: "Headers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
