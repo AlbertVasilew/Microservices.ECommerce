@@ -17,16 +17,11 @@ namespace Cart.Handlers.Upsert
         {
             var header = await dbContext.Headers
                 .Include(x => x.Items)
-                .FirstOrDefaultAsync(x => x.UserId == request.Header.UserId, cancellationToken);
+                .FirstOrDefaultAsync(x => x.UserId == request.UserId, cancellationToken);
 
             if (header == null)
             {
-                header = new Header
-                {
-                    CouponCode = request.Header.CouponCode,
-                    UserId = request.Header.UserId,
-                };
-
+                header = new Header { UserId = request.UserId };
                 await dbContext.Headers.AddAsync(header, cancellationToken);
             }
             else

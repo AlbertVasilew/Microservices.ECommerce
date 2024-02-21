@@ -1,4 +1,6 @@
+using Cart.Contracts;
 using Cart.Data;
+using Cart.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -60,6 +62,15 @@ builder.Services
                 Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("JwtOptions:Secret"))),
         };
     });
+
+builder.Services.AddHttpClient(
+    "Coupon", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:CouponsAPI")));
+
+builder.Services.AddHttpClient(
+    "Product", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:ProductsAPI")));
+
+builder.Services.AddScoped<ICouponService, CouponService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

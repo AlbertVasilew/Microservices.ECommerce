@@ -3,8 +3,6 @@
     public class Header
     {
         public int Id { get; set; }
-        public double Total { get; set; }
-        public double Discount { get; set; }
         public string UserId { get; set; }
         public string CouponCode { get; set; }
 
