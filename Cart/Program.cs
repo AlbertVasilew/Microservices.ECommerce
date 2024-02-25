@@ -1,6 +1,7 @@
 using Cart.Contracts;
 using Cart.Data;
 using Cart.Services;
+using Cart.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -63,12 +64,16 @@ builder.Services
         };
     });
 
-builder.Services.AddHttpClient(
-    "Coupon", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:CouponsAPI")));
+builder.Services
+    .AddHttpClient("Coupon", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:CouponsAPI")))
+    .AddHttpMessageHandler<AuthDelegatingHandler>();
 
-builder.Services.AddHttpClient(
-    "Product", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:ProductsAPI")));
+builder.Services
+    .AddHttpClient("Product", x => x.BaseAddress = new Uri(builder.Configuration.GetValue<string>("Services:ProductsAPI")))
+    .AddHttpMessageHandler<AuthDelegatingHandler>();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<AuthDelegatingHandler>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
