@@ -1,25 +1,16 @@
 ﻿using MediatR;
-using OrderAPI.Data;
+using OrderAPI.Dtos;
 
 namespace OrderAPI.Handlers.PlaceOrder
 {
     public class PlaceOrderRequest : IRequest<Unit>
     {
-        public int CartId { get; set; }
-    }
+        public string UserId { get; set; }
+        public double Total { get; set; }
+        public string CouponCode { get; set; }
+        public double Discount { get; set; }
+        public double BeforeDiscount { get; set; }
+        public IList<ProductDto> Products { get; set; } = new List<ProductDto>();
 
-    public class PlaceOrderHandler : IRequestHandler<PlaceOrderRequest, Unit>
-    {
-        private readonly AppDbContext dbContext;
-
-        public PlaceOrderHandler(AppDbContext dbContext)
-        {
-            this.dbContext = dbContext;
-        }
-
-        public async Task<Unit> Handle(PlaceOrderRequest request, CancellationToken cancellationToken)
-        {
-            return Unit.Value;
-        }
     }
 }
