@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MessageBus;
+using MessageBus.Dtos;
 using Microsoft.Extensions.Configuration;
 using OrderAPI.Data;
 using OrderAPI.Data.Models;
@@ -33,11 +34,18 @@ namespace OrderAPI.Handlers.PlaceOrder
                     x => new Product { Name = x.Name, Price = x.Price, ProductId = x.ProductId, Count = x.Count }).ToList()
             };
 
-            messageBusSender.SendExchangeMessage(
-                request.UserId, configuration.GetValue<string>("MessageBusQueuesTopics:OrderCreatedTopic"));
-
             await dbContext.AddAsync(order, cancellationToken);
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            var orderCreatedMessageDto = new OrderCreatedMessageDto
+            {
+                OrderId = order.Id,
+                UserId = request.UserId,
+                RewardActivity = order.Total
+            };
+
+            messageBusSender.SendExchangeMessage(
+                orderCreatedMessageDto, configuration.GetValue<string>("MessageBusQueuesTopics:OrderCreatedTopic"));
 
             return Unit.Value;
         }

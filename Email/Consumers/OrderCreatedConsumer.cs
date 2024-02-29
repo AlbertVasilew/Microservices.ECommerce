@@ -1,4 +1,5 @@
 ﻿using Email.Services;
+using MessageBus.Dtos;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -6,13 +7,14 @@ using System.Text;
 
 namespace Email.Consumers
 {
-    public class UserRegistrationConsumer : BackgroundService
+    public class OrderCreatedConsumer : BackgroundService
     {
         private readonly IServiceProvider serviceProvider;
         private IModel channel;
         private IConnection connection;
+        private string queueName = string.Empty;
 
-        public UserRegistrationConsumer(IConfiguration configuration, IServiceProvider serviceProvider)
+        public OrderCreatedConsumer(IConfiguration configuration, IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
 
@@ -26,10 +28,13 @@ namespace Email.Consumers
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
 
-            channel.QueueDeclare(
-                configuration.GetValue<string>("MessageBusQueuesAndTopics:AuthRegistration"),
-                exclusive: false,
-                autoDelete: false);
+            var orderCreatedTopic = configuration.GetValue<string>("MessageBusQueuesAndTopics:OrderCreatedTopic");
+
+            channel.ExchangeDeclare(
+                orderCreatedTopic, ExchangeType.Fanout);
+
+            queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queueName, orderCreatedTopic, string.Empty);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -42,7 +47,7 @@ namespace Email.Consumers
             {
                 var content = Encoding.UTF8.GetString(ea.Body.ToArray());
 
-                await HandleMessage(JsonConvert.DeserializeObject<string>(content));
+                await HandleMessage(JsonConvert.DeserializeObject<OrderCreatedMessageDto>(content));
                 channel.BasicAck(ea.DeliveryTag, false);
             };
 
@@ -50,12 +55,12 @@ namespace Email.Consumers
             return Task.CompletedTask;
         }
 
-        private async Task HandleMessage(string email)
+        private async Task HandleMessage(OrderCreatedMessageDto orderCreatedMessageDto)
         {
             using (var scope = serviceProvider.CreateScope())
             {
                 var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
-                await emailService.SentEmail($"{email} registered", email);
+                await emailService.SentEmail($"{orderCreatedMessageDto.UserId} placed order", "sample@gmail.com");
             }
         }
     }
