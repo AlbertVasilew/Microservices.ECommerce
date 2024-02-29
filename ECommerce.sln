@@ -7,17 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coupons", "Coupons\Coupons.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "Auth\Auth.csproj", "{88F6BB8E-FE63-4002-BD9F-99DBB6033DD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products", "Products\Products.csproj", "{1155CF55-D093-4427-BEEE-98028E6CAE5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products", "Products\Products.csproj", "{1155CF55-D093-4427-BEEE-98028E6CAE5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cart", "Cart\Cart.csproj", "{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cart", "Cart\Cart.csproj", "{CFDD58EF-5D1C-468C-BC8C-B5571D9FBE77}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{3B2F88E5-3E98-431D-BE6D-1D3EFE597119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBus", "MessageBus\MessageBus.csproj", "{65F9CB60-AC91-48B8-A7E7-A0F8BA0B12C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageBus", "MessageBus\MessageBus.csproj", "{65F9CB60-AC91-48B8-A7E7-A0F8BA0B12C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email", "Email\Email.csproj", "{857AAD48-F5F7-4A3E-B444-3F24E2BE7A00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email", "Email\Email.csproj", "{857AAD48-F5F7-4A3E-B444-3F24E2BE7A00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderAPI", "Order\OrderAPI.csproj", "{A14C515C-D589-4E7B-AD53-775342DD3345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RewardsAPI", "RewardsAPI\RewardsAPI.csproj", "{06C52C54-B9BF-473E-847D-86E27A9743B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{A14C515C-D589-4E7B-AD53-775342DD3345}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14C515C-D589-4E7B-AD53-775342DD3345}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14C515C-D589-4E7B-AD53-775342DD3345}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06C52C54-B9BF-473E-847D-86E27A9743B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06C52C54-B9BF-473E-847D-86E27A9743B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06C52C54-B9BF-473E-847D-86E27A9743B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06C52C54-B9BF-473E-847D-86E27A9743B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
